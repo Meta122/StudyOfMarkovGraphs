@@ -9,6 +9,7 @@ t_cell* create_cell(int vertex, float probability){
   t_cell* cell = (t_cell*)malloc(sizeof(t_cell));
   cell->vertex = vertex;
   cell->probability = probability;
+  cell->next = NULL;
   return cell;
 }
 
