@@ -23,7 +23,7 @@ t_adjacency_list readGraph(const char *filename) {
     while (fscanf(file, "%d %d %f", &start, &end, &proba) == 3) {
         // we obtain, for each line of the file, the values
         // start, end and proba
-        add_cell(&graph.vertices[start], end, proba) ;
+        add_cell(&graph.vertices[start-1], end, proba) ;
     }
     fclose(file);
     return graph ;
