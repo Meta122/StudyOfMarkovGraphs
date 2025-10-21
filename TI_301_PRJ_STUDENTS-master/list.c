@@ -31,12 +31,8 @@ t_adjacency_list create_empty_adjacency_list(int size){
 
 void print_adjacency_list(t_adjacency_list adjacency_list){
   for (int i = 0; i < adjacency_list.size; i++){
-    printf("List for vertex [%d]: [Head @] -> \n", i);
-    t_cell* cur = adjacency_list.vertices[i].head;
-    while (cur){
-      printf("(%d, %f) @->", cur->vertex, cur->probability);
-      cur = cur->next;
-    }
+    printf("List for vertex [%d]: [Head @] ->", i);
+    display_list(adjacency_list.vertices[i]);
   }
 }
 
@@ -65,6 +61,7 @@ void display_list (t_list list)
   while(cell != NULL)
   {
     printf("(%d, %f) @-> ", cell->vertex, cell->probability);
+    cell = cell->next;
   }
   printf("NULL\n");
 
