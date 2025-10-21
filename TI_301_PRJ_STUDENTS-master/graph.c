@@ -3,7 +3,6 @@
 //
 
 #include "graph.h"
-#include <stdio.h>
 
 t_adjacency_list readGraph(const char *filename) {
     FILE *file = fopen(filename, "rt"); // read-only, text
