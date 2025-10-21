@@ -19,9 +19,11 @@ struct s_list{
 struct adjacency_list{
   int size;
   t_list* vertices;
-};
+} typedef t_adjacency_list;
 
 t_cell* create_cell(int vertex, float probability);
-t_list* create_empty_list();
+t_list create_empty_list();
+
+t_adjacency_list create_empty_adjacency_list(int size);
 
 #endif //LIST_H
