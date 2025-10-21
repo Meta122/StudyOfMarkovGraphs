@@ -25,5 +25,7 @@ t_cell* create_cell(int vertex, float probability);
 t_list create_empty_list();
 
 t_adjacency_list create_empty_adjacency_list(int size);
+void add_cell(t_list *list, int vertex, float probability);
+void display_list (t_list list);
 
 #endif //LIST_H

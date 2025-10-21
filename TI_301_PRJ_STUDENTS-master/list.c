@@ -26,3 +26,33 @@ t_adjacency_list create_empty_adjacency_list(int size){
     }
     return adjacency_list;
 }
+
+void add_cell(t_list *list, int vertex, float probability)
+{
+  t_cell *cell = create_cell(vertex, probability);
+  if(list->head == NULL)
+  {
+    list->head = cell;
+  }
+  else
+  {
+    t_cell* temp = list->head;
+    while(temp->next != NULL)
+    {
+      temp = temp->next;
+    }
+    temp->next = cell;
+  }
+}
+
+void display_list (t_list list)
+{
+  printf("[head @] -> ");
+  t_cell* cell = list.head;
+  while(cell != NULL)
+  {
+    printf("(%d, %f) @-> ", cell->vertex, cell->probability);
+  }
+  printf("NULL\n");
+
+}
