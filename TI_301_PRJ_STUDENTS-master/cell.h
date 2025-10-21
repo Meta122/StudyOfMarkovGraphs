@@ -1,6 +1,7 @@
 //
 // Created by astri on 21/10/2025.
 //
+#include "stdlib.h"
 
 #ifndef CELL_H
 #define CELL_H
@@ -19,5 +20,8 @@ struct adjacency_list{
   int size;
   t_list* vertices;
 };
+
+t_cell* create_cell(int vertex, float probability);
+t_list* create_empty_list();
 
 #endif //CELL_H
