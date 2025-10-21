@@ -2,6 +2,7 @@
 // Created by astri on 21/10/2025.
 //
 #include "stdlib.h"
+#include <stdio.h>
 
 #ifndef LIST_H
 #define LIST_H

@@ -3,7 +3,6 @@
 //
 
 #include "graph.h"
-#include <stdio.h>
 
 t_adjacency_list readGraph(const char *filename) {
     FILE *file = fopen(filename, "rt"); // read-only, text
@@ -27,4 +26,22 @@ t_adjacency_list readGraph(const char *filename) {
     }
     fclose(file);
     return graph ;
+}
+
+int checkGraph(t_adjacency_list graph) {
+    for (int i = 0; i < graph.size; i++) {
+        float sum = 0 ;
+        t_cell * curr = graph.vertices[i].head ;
+        while (curr != NULL) {
+            sum += curr->probability ;
+            curr = curr->next ;
+        }
+        if (sum < 0.99 || sum > 1.01) {
+            printf("The graph is not a Markov graph : ") ;
+            printf("the sum of probabilities of vertex %d is %f.\n", i+1, sum) ;
+            return 0 ;
+        }
+    }
+    printf("The graph is a Markov graph.\n") ;
+    return 1 ;
 }
