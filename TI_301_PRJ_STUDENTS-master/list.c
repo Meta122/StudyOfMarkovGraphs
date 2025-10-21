@@ -2,7 +2,7 @@
 // Created by astri on 21/10/2025.
 //
 
-#include "cell.h"
+#include "list.h"
 
 t_cell* create_cell(int vertex, float probability){
   t_cell* cell = (t_cell*)malloc(sizeof(t_cell));

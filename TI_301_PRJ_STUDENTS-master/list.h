@@ -3,8 +3,8 @@
 //
 #include "stdlib.h"
 
-#ifndef CELL_H
-#define CELL_H
+#ifndef LIST_H
+#define LIST_H
 
 struct s_cell {
     int vertex;
@@ -24,4 +24,4 @@ struct adjacency_list{
 t_cell* create_cell(int vertex, float probability);
 t_list* create_empty_list();
 
-#endif //CELL_H
+#endif //LIST_H
