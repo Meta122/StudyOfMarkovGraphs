@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.24)
-project(2526_TI301_PJT C)
+project(StudyOfMarkovGraphs C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(TI_301_PJT
+add_executable(StudyOfMarkovGraphs
         main.c utils.c list.c graph.c)
 

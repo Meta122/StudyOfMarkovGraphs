@@ -1,0 +1,9 @@
+# ninja log v6
+14	80	7827571147156404	CMakeFiles/StudyOfMarkovGraphs.dir/TI_301_PRJ_STUDENTS-master/main.c.obj	fb05622c301c738e
+11	86	7827571147116115	CMakeFiles/StudyOfMarkovGraphs.dir/TI_301_PRJ_STUDENTS-master/list.c.obj	2fab7fe2eb76734e
+3	81	7827571147034098	CMakeFiles/StudyOfMarkovGraphs.dir/TI_301_PRJ_STUDENTS-master/graph.c.obj	9813b39ced722b77
+19	94	7827571147199512	CMakeFiles/StudyOfMarkovGraphs.dir/TI_301_PRJ_STUDENTS-master/utils.c.obj	f67fff70c7ae498a
+4	198	7827571610711466	build.ninja	c22587821c4b1179
+2	145	7827571610962887	StudyOfMarkovGraphs.exe	48457742a2c41502
+3	59	7827572142313089	CMakeFiles/StudyOfMarkovGraphs.dir/TI_301_PRJ_STUDENTS-master/main.c.obj	fb05622c301c738e
+60	139	7827572142878248	StudyOfMarkovGraphs.exe	48457742a2c41502
