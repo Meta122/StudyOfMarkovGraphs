@@ -36,9 +36,9 @@ int checkGraph(t_adjacency_list graph) {
             sum += curr->probability ;
             curr = curr->next ;
         }
-        if (sum < 0.99 || sum > 1) {
+        if (sum < 0.99 || sum > 1.01) {
             printf("The graph is not a Markov graph : ") ;
-            printf("the sum of probabilities of vertex %d : %f.\n", i+1, sum) ;
+            printf("the sum of probabilities of vertex %d is %f.\n", i+1, sum) ;
             return 0 ;
         }
     }
