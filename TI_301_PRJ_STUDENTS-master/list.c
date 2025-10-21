@@ -3,6 +3,7 @@
 //
 
 #include "list.h"
+#include <stdio.h>
 
 t_cell* create_cell(int vertex, float probability){
   t_cell* cell = (t_cell*)malloc(sizeof(t_cell));
@@ -25,6 +26,17 @@ t_adjacency_list create_empty_adjacency_list(int size){
       adjacency_list.vertices[i] = create_empty_list();
     }
     return adjacency_list;
+}
+
+void print_adjacency_list(t_adjacency_list adjacency_list){
+  for (int i = 0; i < adjacency_list.size; i++){
+    printf("List for vertex [%d]: [Head @] -> \n", i);
+    t_cell* cur = adjacency_list.vertices[i].head;
+    while (cur){
+      printf("(%d, %f) @->", cur->vertex, cur->probability);
+      cur = cur->next;
+    }
+  }
 }
 
 void add_cell(t_list *list, int vertex, float probability)

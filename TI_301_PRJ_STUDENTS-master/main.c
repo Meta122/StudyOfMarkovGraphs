@@ -1,7 +1,7 @@
-#include <stdio.h>
+#include "graph.h"
 
 
 int main() {
-    printf("Hello, World!\n");
+    print_adjacency_list(readGraph("example1.txt"));
     return 0;
 }
