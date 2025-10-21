@@ -31,7 +31,7 @@ t_adjacency_list create_empty_adjacency_list(int size){
 
 void print_adjacency_list(t_adjacency_list adjacency_list){
   for (int i = 0; i < adjacency_list.size; i++){
-    printf("List for vertex [%d]: [Head @] ->", i);
+    printf("List for vertex [%d]: ", i);
     display_list(adjacency_list.vertices[i]);
   }
 }
