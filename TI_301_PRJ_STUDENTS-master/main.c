@@ -51,5 +51,8 @@
         graph = readGraph("../TI_301_PRJ_STUDENTS-master/data/exemple_valid_step3.txt");
         if (checkGraph(graph)) print_adjacency_list(graph);
 
+        printf("I created a tree on mermaid here ");
+        create_mermaid_tree(graph);
+
         return 0;
     }
