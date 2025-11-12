@@ -13,16 +13,25 @@ struct s_tarjan_vertex {
     int is_in_stack;
 } typedef t_tarjan_vertex;
 
+struct s_tarjan_cell {
+    t_tarjan_vertex* vertex;
+    t_tarjan_vertex* next;
+} typedef t_tarjan_cell;
 
 struct s_class{
     char* name;
-    t_tarjan_vertex *head;
-    t_tarjan_vertex *tail;
+    t_tarjan_cell *head;
+    t_tarjan_cell *tail;
 } typedef t_class;
 
+struct s_class_cell {
+    t_tarjan_vertex* class;
+    t_tarjan_vertex* next;
+} typedef t_class_cell;
+
 struct s_partition{
-    t_class *head;
-    t_class *tail;
+    t_class_cell *head;
+    t_class_cell *tail;
 } typedef t_partition;
 
 
