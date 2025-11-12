@@ -8,7 +8,6 @@
 #define TARJAN_H
 
 struct s_tarjan_vertex {
-    float probability;
     int identifier;
     int number;
     int accessible_number;
