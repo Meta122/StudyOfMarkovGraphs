@@ -1,12 +1,11 @@
-//
-// Created by astri on 12/11/2025.
-//
-
 #ifndef TARJAN_ALGO_H
 #define TARJAN_ALGO_H
 
 #include "list.h"
-#include "tarjan.h"
+#include "stack.h"
 
+int min(int, int) ;
+void strongConnect(t_adjacency_list, t_tarjan_vertex **, t_tarjan_vertex, t_stacklist, int *, t_partition) ;
+t_partition tarjan(t_adjacency_list) ;
 
 #endif //TARJAN_ALGO_H
