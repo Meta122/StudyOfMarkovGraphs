@@ -29,9 +29,9 @@ void strongConnect(t_adjacency_list G, t_tarjan_vertex * v, t_stacklist * stack,
         do {
             *w = pop(stack) ;
             w->is_in_stack = 0 ;
-            // Ajouter w à C
+            add_vertex(w, &C) ;
         } while (w != v) ;
-        // Ajouter C à partition
+        add_class(&C, &partition) ;
     }
 }
 
@@ -47,6 +47,9 @@ t_partition tarjan(t_adjacency_list G) {
             strongConnect(G, v, &stack, &num, partition, vertex_list) ;
         }
     }
-
+    for (int i = 0 ; i < G.size ; i++) {
+        free(vertex_list[i]) ;
+    }
+    free(vertex_list) ;
     return partition ;
 }
