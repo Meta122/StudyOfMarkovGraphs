@@ -1,10 +1,10 @@
-#include "graph.h"
-#include "mermaid.h"
+#include "Mermaid Graph/graph.h"
+#include "Mermaid Graph/mermaid.h"
 
 
 
 
-    int main() {
+int main() {
         t_adjacency_list graph;
 
         printf("Exemple 1:\n");
