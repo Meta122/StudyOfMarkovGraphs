@@ -15,4 +15,6 @@ add_executable(StudyOfMarkovGraphs
     TI_301_PRJ_STUDENTS-master/utils.h
     TI_301_PRJ_STUDENTS-master/mermaid.c
     TI_301_PRJ_STUDENTS-master/mermaid.h
+    TI_301_PRJ_STUDENTS-master/tarjan.c
+    TI_301_PRJ_STUDENTS-master/tarjan.h
 )
