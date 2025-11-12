@@ -5,9 +5,8 @@
 #include "tarjan.h"
 #include <stdio.h>
 
-t_tarjan_vertex* create_tarjan_vertex(int identifier, float proba){
+t_tarjan_vertex* create_tarjan_vertex(int identifier){
     t_tarjan_vertex* cell = (t_tarjan_vertex*)malloc(sizeof(t_tarjan_vertex));
-    cell->probability;
     cell->identifier = identifier;
     cell->number = -1;
     cell->accessible_number = -1;
@@ -30,7 +29,7 @@ t_partition create_empty_partition(){
 t_tarjan_vertex** createVertexList (t_adjacency_list list){
     t_tarjan_vertex** array = malloc(sizeof(t_tarjan_vertex*) * list.size);
     for (int i=0; i<list.size; i++) {
-        array[i] = create_tarjan_vertex(list.vertices[i].head->vertex,list.vertices[i].head->probability); ;
+        array[i] = create_tarjan_vertex(list.vertices[i].head->vertex); ;
     }
     return array ;
 }
