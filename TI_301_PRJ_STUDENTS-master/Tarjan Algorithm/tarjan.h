@@ -2,11 +2,13 @@
 // Created by astri on 12/11/2025.
 //
 #include <stdlib.h>
+#include "list.h"
 
 #ifndef TARJAN_H
 #define TARJAN_H
 
 struct s_tarjan_vertex {
+    float probability;
     int identifier;
     int number;
     int accessible_number;
@@ -15,7 +17,7 @@ struct s_tarjan_vertex {
 
 struct s_tarjan_cell {
     t_tarjan_vertex* vertex;
-    t_tarjan_vertex* next;
+    struct s_tarjan_cell* next;
 } typedef t_tarjan_cell;
 
 struct s_class{
@@ -25,8 +27,8 @@ struct s_class{
 } typedef t_class;
 
 struct s_class_cell {
-    t_tarjan_vertex* class;
-    t_tarjan_vertex* next;
+    t_class* class;
+    struct s_class_cell* next;
 } typedef t_class_cell;
 
 struct s_partition{
@@ -35,9 +37,10 @@ struct s_partition{
 } typedef t_partition;
 
 
-t_tarjan_vertex* create_tarjan_cell(int identifier);
+t_tarjan_vertex* create_tarjan_vertex(int identifier, float proba);
 t_class create_empty_class();
 t_partition create_empty_partition();
+t_tarjan_vertex** createVertexList (t_adjacency_list list);
 
 
 #endif //TARJAN_H

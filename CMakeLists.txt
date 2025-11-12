@@ -19,4 +19,8 @@ add_executable(StudyOfMarkovGraphs
         "TI_301_PRJ_STUDENTS-master/Tarjan Algorithm/tarjan.h"
         "TI_301_PRJ_STUDENTS-master/Tarjan Algorithm/stack.c"
         "TI_301_PRJ_STUDENTS-master/Tarjan Algorithm/stack.h"
+        "TI_301_PRJ_STUDENTS-master/Tarjan Algorithm/tarjan_algo.c"
+        "TI_301_PRJ_STUDENTS-master/Tarjan Algorithm/tarjan_algo.h"
+
+
 )
