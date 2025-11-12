@@ -58,3 +58,9 @@ void add_class(t_class * C, t_partition * partition) {
         partition->tail = cell ;
     }
 }
+
+void display_class(t_class C) {
+    printf("Component CX : {") ;
+    t_class_cell * current = C.head ;
+    // à finir
+}

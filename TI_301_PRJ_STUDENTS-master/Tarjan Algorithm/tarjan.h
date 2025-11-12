@@ -42,6 +42,7 @@ t_partition create_empty_partition();
 t_tarjan_vertex** createVertexList (t_adjacency_list);
 void add_vertex(t_tarjan_vertex *, t_class *);
 void add_class(t_class *, t_partition *);
+void display_class(t_class);
 
 
 #endif //TARJAN_H

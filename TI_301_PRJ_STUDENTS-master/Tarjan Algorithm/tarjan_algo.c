@@ -13,7 +13,7 @@ void strongConnect(t_adjacency_list G, t_tarjan_vertex * v, t_stacklist * stack,
     t_list list = G.vertices[*num-1] ;
     t_cell * curr = list.head->next ;
     while (curr != NULL) {
-        int id = curr->vertex ;
+        int id = curr->vertex-1 ;
         t_tarjan_vertex * w = vertex_list[id] ;
         if (w->number == -1) {
             strongConnect(G, w, stack, num, partition, vertex_list) ;
