@@ -4,7 +4,7 @@
 
 typedef struct s_stackcell {
   t_tarjan_vertex vertex ;
-  t_tarjan_vertex * next ;
+  struct s_stackcell * next ;
 } t_stackcell ;
 
 typedef struct s_stacklist {
