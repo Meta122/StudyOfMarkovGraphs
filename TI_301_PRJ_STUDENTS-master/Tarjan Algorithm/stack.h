@@ -12,7 +12,9 @@ typedef struct s_stacklist {
 } t_stacklist ;
 
 t_tarjan_vertex pop(t_stacklist *) ;
+void push(t_stacklist *, t_tarjan_vertex) ;
 t_tarjan_vertex top(t_stacklist) ;
-int isInStack(int, t_stacklist) ;
+int isInStack(t_tarjan_vertex *, t_stacklist *) ;
+t_stacklist createEmptyStack() ;
 
 #endif //STACK_H
