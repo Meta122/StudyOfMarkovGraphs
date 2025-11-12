@@ -1,19 +1,19 @@
 #include "stack.h"
 
-int pop(t_stacklist * stack) {
+t_tarjan_vertex pop(t_stacklist * stack) {
     t_stackcell * head = stack->head ;
     stack->head = stack->head->next ;
-    return head->number ;
+    return head->vertex ;
 }
 
-int top(t_stacklist stack) {
-    return (stack.head->number) ;
+t_tarjan_vertex top(t_stacklist stack) {
+    return (stack.head->vertex) ;
 }
 
-int isInStack(int n, t_stacklist stack) {
+int isInStack(t_tarjan_vertex v, t_stacklist stack) {
     t_stackcell * current = stack.head ;
     while (current != stack.head) {
-      if (current->number == n) {
+      if (&current->vertex == &v) {
         return 1 ;
       }
       current = current->next ;
