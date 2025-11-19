@@ -100,11 +100,40 @@ t_link* createLink(int a, int b){
 t_link_array* createLinkArray(){
   t_link_array* array = (t_link_array*)malloc(sizeof(t_link_array));
     if (array == NULL) return NULL;
-    array->links = (t_link*)malloc(sizeof(t_link) * 20);
+    array->links = (t_link*)malloc(sizeof(t_link) * 50);
     if (array->links == NULL) {
         free(array);
         return NULL;
     }
   array->log_size = 0;
   return array;
+}
+
+void create_mermaid_hasse(t_link_array* p_link_array) {
+    FILE *file = fopen("hasse_diagram.txt", "w");
+    if (file == NULL) {
+        perror("Error opening the file hasse_diagram.txt");
+        return;
+    }
+
+    char output[10000] =
+        "---\n"
+        "config:\n"
+        "layout: elk\n"
+        "theme: neo\n"
+        "look: neo\n"
+        "--- \n"
+        "\nflowchart LR \n";
+
+    for (int i = 0; i < p_link_array->log_size; i++) {
+        char line[256] = "";
+        t_link current_link = p_link_array->links[i];
+
+        sprintf(line, "C%d[%d] --> C%d[%d]\n", current_link.from, current_link.from, current_link.to, current_link.to);
+        strcat(output, line);
+    }
+
+    fprintf(file, "%s", output);
+    fclose(file);
+    printf("Hasse diagram generated in hasse_diagram.txt\n");
 }

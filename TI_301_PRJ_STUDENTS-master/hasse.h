@@ -2,6 +2,7 @@
 #define __HASSE_H__
 
 #include "Tarjan Algorithm/tarjan.h"
+#include "string.h"
 
 struct s_link {
     int from;
@@ -20,6 +21,8 @@ t_link* createLink(int, int);
 t_link_array* createLinkArray();
 
 void addLinks(int size,t_link_array *p_link_array, int* class_of_vertex, t_adjacency_list);
+
+void create_mermaid_hasse(t_link_array* p_link_array);
 
 /**
  * @brief Creates a link array from the given partition and graph.
