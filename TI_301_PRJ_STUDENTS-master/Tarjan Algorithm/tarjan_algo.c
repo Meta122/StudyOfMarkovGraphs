@@ -13,7 +13,7 @@ void strongConnect(t_adjacency_list G, t_tarjan_vertex * v, t_stacklist * stack,
     t_list list = G.vertices[*num-1] ;
     t_cell * curr = list.head->next ;
     while (curr != NULL) {
-        int id = curr->vertex ;
+        int id = curr->vertex-1 ;
         t_tarjan_vertex * w = vertex_list[id] ;
         if (w->number == -1) {
             strongConnect(G, w, stack, num, partition, vertex_list) ;
@@ -29,9 +29,9 @@ void strongConnect(t_adjacency_list G, t_tarjan_vertex * v, t_stacklist * stack,
         do {
             *w = pop(stack) ;
             w->is_in_stack = 0 ;
-            // Ajouter w à C
+            add_vertex(w, &C) ;
         } while (w != v) ;
-        // Ajouter C à partition
+        add_class(&C, &partition) ;
     }
 }
 
@@ -47,6 +47,9 @@ t_partition tarjan(t_adjacency_list G) {
             strongConnect(G, v, &stack, &num, partition, vertex_list) ;
         }
     }
-
+    for (int i = 0 ; i < G.size ; i++) {
+        free(vertex_list[i]) ;
+    }
+    free(vertex_list) ;
     return partition ;
 }

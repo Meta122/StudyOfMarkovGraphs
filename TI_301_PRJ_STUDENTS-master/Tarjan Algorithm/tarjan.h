@@ -36,10 +36,13 @@ struct s_partition{
 } typedef t_partition;
 
 
-t_tarjan_vertex* create_tarjan_vertex(int identifier, float proba);
+t_tarjan_vertex* create_tarjan_vertex(int);
 t_class create_empty_class();
 t_partition create_empty_partition();
-t_tarjan_vertex** createVertexList (t_adjacency_list list);
+t_tarjan_vertex** createVertexList (t_adjacency_list);
+void add_vertex(t_tarjan_vertex *, t_class *);
+void add_class(t_class *, t_partition *);
+void display_class(t_class);
 
 
 #endif //TARJAN_H
