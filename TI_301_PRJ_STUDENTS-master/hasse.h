@@ -19,7 +19,7 @@ t_link* createLink(int, int);
 
 t_link_array* createLinkArray();
 
-void addLinks(int size, t_tarjan_vertex** graph,t_link_array *p_link_array, int* class_of_vertex, t_adjacency_list);
+void addLinks(int size,t_link_array *p_link_array, int* class_of_vertex, t_adjacency_list);
 
 /**
  * @brief Creates a link array from the given partition and graph.

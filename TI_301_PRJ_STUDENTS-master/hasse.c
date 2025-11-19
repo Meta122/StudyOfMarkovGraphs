@@ -17,7 +17,7 @@ void removeTransitiveLinks(t_link_array *p_link_array)
                 t_link link2 = p_link_array->links[j];
                 if (link1.from == link2.from)
                 {
-                    // look for a link from link2.to to link1.to
+                    // look for a link from link2.to link1.to
                     int k = 0;
                     while (k < p_link_array->log_size && !to_remove)
                     {
@@ -49,14 +49,28 @@ void removeTransitiveLinks(t_link_array *p_link_array)
 }
 
 
-void addLinks(int size, t_tarjan_vertex** ids, t_link_array* p_link_array, int* class_of_vertex, t_adjacency_list graph){
+void addLinks(int size, t_link_array* p_link_array, int* class_of_vertex, t_adjacency_list graph){
     for (int i = 0; i < size; i++){
       int Ci = class_of_vertex[i];
       t_cell* cur = graph.vertices[i].head->next;
-      int j = 0;
       while (cur){
-        int Cj = class_of_vertex[cur->vertex];
+          int j = cur->vertex - 1;
+          int Cj = class_of_vertex[j];
         if (Ci != Cj){
+            // Verify if the link already exists or not
+            int link_exists = 0;
+            for (int k = 0; k < p_link_array->log_size; k++) {
+                if (p_link_array->links[k].from == Ci && p_link_array->links[k].to == Cj) {
+                    link_exists = 1;
+                    break;
+                }
+            }
+            if (!link_exists) {
+                p_link_array->links[p_link_array->log_size].from = Ci;
+                p_link_array->links[p_link_array->log_size].to = Cj;
+                p_link_array->log_size++;
+            }
+            /*
             t_link* temp_link = createLink(Ci, Cj);
             int k = 0;
             while (k < p_link_array->log_size){
@@ -68,24 +82,29 @@ void addLinks(int size, t_tarjan_vertex** ids, t_link_array* p_link_array, int* 
                     p_link_array->links[k] = *temp_link;
                     k = p_link_array->log_size;
                 }
-            }
+            }*/
         }
-        j++;
         cur = cur->next;
       }
     }
 
 }
-
+/*
 t_link* createLink(int a, int b){
       t_link* link = (t_link*)malloc(sizeof(t_link));
       link->from = a;
       link->to = b;
       return link;
-  }
+  }*/
 
 t_link_array* createLinkArray(){
-  t_link_array* link = (t_link_array*)malloc(sizeof(t_link_array));
-  link->log_size = 0;
-  return link;
+  t_link_array* array = (t_link_array*)malloc(sizeof(t_link_array));
+    if (array == NULL) return NULL;
+    array->links = (t_link*)malloc(sizeof(t_link) * 20);
+    if (array->links == NULL) {
+        free(array);
+        return NULL;
+    }
+  array->log_size = 0;
+  return array;
 }
