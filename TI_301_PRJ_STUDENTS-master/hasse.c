@@ -48,7 +48,6 @@ void removeTransitiveLinks(t_link_array *p_link_array)
     }
 }
 
-
 void addLinks(int size, t_link_array* p_link_array, int* class_of_vertex, t_adjacency_list graph){
     for (int i = 0; i < size; i++){
       int Ci = class_of_vertex[i];
