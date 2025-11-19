@@ -1,7 +1,3 @@
-//
-// Created by astri on 12/11/2025.
-//
-#include <stdlib.h>
 #include "list.h"
 
 #ifndef TARJAN_H
@@ -43,6 +39,7 @@ t_tarjan_vertex** createVertexList (t_adjacency_list);
 void add_vertex(t_tarjan_vertex *, t_class *);
 void add_class(t_class *, t_partition *);
 void display_class(t_class);
+void display_partition(t_partition) ;
 
 
 #endif //TARJAN_H

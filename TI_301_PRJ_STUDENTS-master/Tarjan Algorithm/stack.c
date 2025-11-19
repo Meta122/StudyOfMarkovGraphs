@@ -1,31 +1,28 @@
 #include "stack.h"
 
-t_tarjan_vertex pop(t_stacklist * stack) {
-    t_stackcell * head = stack->head ;
-    stack->head = stack->head->next ;
-    return head->vertex ;
-}
-
-t_tarjan_vertex top(t_stacklist stack) {
-    return (stack.head->vertex) ;
-}
-
-void push(t_stacklist * stack, t_tarjan_vertex vertex) {
-    stack->head = stack->head->next ;
-    stack->head->vertex = vertex ;
-    stack->head->next = stack->head->next ;
-    stack->head = stack->head->next ;
-}
-
-int isInStack(t_tarjan_vertex * v, t_stacklist * stack) {
-    t_stackcell * current = stack->head ;
-    while (current != stack->head) {
-      if (&current->vertex == v) {
-        return 1 ;
-      }
-      current = current->next ;
+t_tarjan_vertex * pop(t_stacklist * stack) {
+    if (stack->head == NULL) {
+        return NULL ;
     }
-    return 0 ;
+    t_stackcell * old = stack->head ;
+    t_tarjan_vertex * v = old->vertex ;
+    stack->head = old->next ;
+    free(old) ;
+    return v ;
+}
+
+t_tarjan_vertex * top(t_stacklist stack) {
+    if (stack.head == NULL) {
+        return NULL ;
+    }
+    return stack.head->vertex ;
+}
+
+void push(t_stacklist * stack, t_tarjan_vertex * vertex) {
+    t_stackcell * new_cell = (t_stackcell *)malloc(sizeof(t_stackcell));
+    new_cell->vertex = vertex ;
+    new_cell->next = stack->head ;
+    stack->head = new_cell ;
 }
 
 t_stacklist createEmptyStack() {
