@@ -62,6 +62,14 @@ t_partition tarjan(t_adjacency_list G) {
             strongConnect(G, v, &stack, &num, &partition, vertex_list) ;
         }
     }
+    t_class_cell * current = partition.head;
+    int i = 1;
+    while (current != NULL) {
+        current->class->name = malloc(16 * sizeof(char)); // Alloue suffisamment d'espace
+        sprintf(current->class->name, "C%d", i);
+        current = current->next;
+        i++;
+    }
     free(vertex_list) ;
     return partition ;
 }

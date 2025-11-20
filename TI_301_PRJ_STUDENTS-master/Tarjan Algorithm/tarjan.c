@@ -81,7 +81,7 @@ void display_partition(t_partition partition) {
     int i = 1;
     printf("\n|----------------------------------|\n");
     while (current_class_cell != NULL) {
-        printf("     Component C%d: ", i);
+        printf("     Component %s: ", current_class_cell->class->name);
         display_class(*current_class_cell->class);
         current_class_cell = current_class_cell->next;
         i++;
