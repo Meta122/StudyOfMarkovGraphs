@@ -20,7 +20,7 @@ t_link* createLink(int, int);
 
 t_link_array* createLinkArray();
 
-void addLinks(int size,t_link_array *p_link_array, int* class_of_vertex, t_adjacency_list);
+void addLinks(t_link_array* p_link_array, t_adjacency_list graph);
 
 void create_mermaid_hasse(t_link_array* p_link_array);
 

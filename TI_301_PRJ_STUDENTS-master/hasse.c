@@ -1,6 +1,8 @@
 #include <malloc.h>
 #include "hasse.h"
 
+#include "Tarjan Algorithm/tarjan_algo.h"
+
 
 void removeTransitiveLinks(t_link_array *p_link_array)
 {
@@ -48,7 +50,74 @@ void removeTransitiveLinks(t_link_array *p_link_array)
     }
 }
 
-void addLinks(int size, t_link_array* p_link_array, int* class_of_vertex, t_adjacency_list graph){
+
+void addLinks(t_link_array* p_link_array, t_adjacency_list graph) {
+    t_partition partition = tarjan(graph);
+    int size = graph.size;
+
+    int* class_map = (int*)malloc(sizeof(int) * size);
+
+    if (class_map == NULL) {
+        printf("Failed to allocate memory for class map");
+        return;
+    }
+
+    for(int i=0; i<size; i++) class_map[i] = -1;
+
+    int current_class_id = 0;
+    t_class_cell* class_node = partition.head;
+
+    while (class_node != NULL) {
+        t_tarjan_cell* vertex_node = class_node->class->head;
+
+        while (vertex_node != NULL) {
+            int vertex_id = vertex_node->vertex->identifier;
+
+            if (vertex_id - 1 >= 0 && vertex_id - 1 < size) {
+                class_map[vertex_id - 1] = current_class_id;
+            }
+
+            vertex_node = vertex_node->next;
+        }
+
+        current_class_id++;
+        class_node = class_node->next;
+    }
+
+    for (int i = 0; i < size; i++) {
+        int Ci = class_map[i];
+        if (Ci == -1) continue;
+
+        t_cell* cur = graph.vertices[i].head->next;
+
+        while (cur) {
+            int j_index = cur->vertex - 1;
+
+            if (j_index >= 0 && j_index < size) {
+                int Cj = class_map[j_index];
+
+                if (Cj != -1 && Ci != Cj) {
+                    int link_exists = 0;
+                    for (int k = 0; k < p_link_array->log_size; k++) {
+                        if (p_link_array->links[k].from == Ci && p_link_array->links[k].to == Cj) {
+                            link_exists = 1;
+                            break;
+                        }
+                    }
+                    if (!link_exists) {
+                        p_link_array->links[p_link_array->log_size].from = Ci;
+                        p_link_array->links[p_link_array->log_size].to = Cj;
+                        p_link_array->log_size++;
+                    }
+                }
+            }
+            cur = cur->next;
+        }
+    }
+    free(class_map);
+}
+
+/*void addLinks(int size, t_link_array* p_link_array, int* class_of_vertex, t_adjacency_list graph){
     for (int i = 0; i < size; i++){
       int Ci = class_of_vertex[i];
       t_cell* cur = graph.vertices[i].head->next;
@@ -69,7 +138,6 @@ void addLinks(int size, t_link_array* p_link_array, int* class_of_vertex, t_adja
                 p_link_array->links[p_link_array->log_size].to = Cj;
                 p_link_array->log_size++;
             }
-            /*
             t_link* temp_link = createLink(Ci, Cj);
             int k = 0;
             while (k < p_link_array->log_size){
@@ -81,20 +149,13 @@ void addLinks(int size, t_link_array* p_link_array, int* class_of_vertex, t_adja
                     p_link_array->links[k] = *temp_link;
                     k = p_link_array->log_size;
                 }
-            }*/
+            }
         }
         cur = cur->next;
       }
     }
 
-}
-/*
-t_link* createLink(int a, int b){
-      t_link* link = (t_link*)malloc(sizeof(t_link));
-      link->from = a;
-      link->to = b;
-      return link;
-  }*/
+}*/
 
 t_link_array* createLinkArray(){
   t_link_array* array = (t_link_array*)malloc(sizeof(t_link_array));
