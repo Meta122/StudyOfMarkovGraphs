@@ -36,3 +36,25 @@ float * copy_matrix(float * matr)
 
 }
 
+float * multiply_matrix(float * matr1, float * matr2)
+{
+    float * result;
+
+}
+
+float difference_matrix(float * matr1, float * matr2)
+{
+    float * result;
+    int i=0,j=0;
+    while (matr1[i])
+    {
+        while (matr2[j])
+        {
+            result[i][j]=matr[1]-matr[2];
+            j++;
+        }
+        i++;
+    }
+    return result;
+}
+
