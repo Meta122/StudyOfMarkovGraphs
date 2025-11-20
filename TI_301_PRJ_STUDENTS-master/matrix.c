@@ -58,3 +58,27 @@ float difference_matrix(float * matr1, float * matr2)
     return result;
 }
 
+int** matrix_multiply(int n, int** A, int** B) {
+    int** C = (int**)malloc(n * sizeof(int*));
+    if (C == NULL) return NULL;
+
+    for (int i = 0; i < n; i++) {
+        C[i] = (int*)calloc(n, sizeof(int));
+        if (C[i] == NULL) {
+            for (int k = 0; k < i; k++) free(C[k]);
+            free(C);
+            return NULL;
+        }
+    }
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            for (int k = 0; k < n; k++) {
+                C[i][j] += A[i][k] * B[k][j];
+            }
+        }
+    }
+
+    return C;
+}
+//Ai generated, prompt "write a function that multiplies two square matrices in C"
