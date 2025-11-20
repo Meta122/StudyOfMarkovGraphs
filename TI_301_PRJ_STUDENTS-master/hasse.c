@@ -55,16 +55,9 @@ void addLinks(t_link_array* p_link_array, t_adjacency_list graph) {
     t_partition partition = tarjan(graph);
     int size = graph.size;
 
-    int* class_map = (int*)malloc(sizeof(int) * size);
+    t_class** class_map = malloc(sizeof(t_class*) * size);
 
-    if (class_map == NULL) {
-        printf("Failed to allocate memory for class map");
-        return;
-    }
 
-    for(int i=0; i<size; i++) class_map[i] = -1;
-
-    int current_class_id = 0;
     t_class_cell* class_node = partition.head;
 
     while (class_node != NULL) {
@@ -73,42 +66,35 @@ void addLinks(t_link_array* p_link_array, t_adjacency_list graph) {
         while (vertex_node != NULL) {
             int vertex_id = vertex_node->vertex->identifier;
 
-            if (vertex_id - 1 >= 0 && vertex_id - 1 < size) {
-                class_map[vertex_id - 1] = current_class_id;
-            }
+            class_map[vertex_id - 1] = class_node->class;
 
             vertex_node = vertex_node->next;
         }
-
-        current_class_id++;
         class_node = class_node->next;
     }
 
     for (int i = 0; i < size; i++) {
-        int Ci = class_map[i];
-        if (Ci == -1) continue;
+        t_class* Ci = class_map[i];
 
-        t_cell* cur = graph.vertices[i].head->next;
+        t_cell* cur = graph.vertices[i].head;
 
         while (cur) {
             int j_index = cur->vertex - 1;
 
-            if (j_index >= 0 && j_index < size) {
-                int Cj = class_map[j_index];
+            t_class* Cj = class_map[j_index];
 
-                if (Cj != -1 && Ci != Cj) {
-                    int link_exists = 0;
-                    for (int k = 0; k < p_link_array->log_size; k++) {
-                        if (p_link_array->links[k].from == Ci && p_link_array->links[k].to == Cj) {
-                            link_exists = 1;
-                            break;
-                        }
+            if (Ci != Cj) {
+                int link_exists = 0;
+                for (int k = 0; k < p_link_array->log_size; k++) {
+                    if (p_link_array->links[k].from->name == Ci->name && p_link_array->links[k].to->name == Cj->name) {
+                        link_exists = 1;
+                        break;
                     }
-                    if (!link_exists) {
-                        p_link_array->links[p_link_array->log_size].from = Ci;
-                        p_link_array->links[p_link_array->log_size].to = Cj;
-                        p_link_array->log_size++;
-                    }
+                }
+                if (!link_exists) {
+                    p_link_array->links[p_link_array->log_size].from = Ci;
+                    p_link_array->links[p_link_array->log_size].to = Cj;
+                    p_link_array->log_size++;
                 }
             }
             cur = cur->next;
@@ -169,31 +155,46 @@ t_link_array* createLinkArray(){
   return array;
 }
 
-void create_mermaid_hasse(t_link_array* p_link_array) {
+void get_class_label(t_class* p_class, char* buffer) {
+    strcpy(buffer, "{");
+    t_tarjan_cell* curr = p_class->head;
+    while (curr != NULL) {
+        char num_str[20];
+        sprintf(num_str, "%d", curr->vertex->identifier);
+        strcat(buffer, num_str);
+        if (curr->next != NULL) strcat(buffer, ",");
+        curr = curr->next;
+    }
+    strcat(buffer, "}");
+}
+
+void create_mermaid_hasse(t_link_array* p_link_array, t_partition partition) {
     FILE *file = fopen("hasse_diagram.txt", "w");
     if (file == NULL) {
         perror("Error opening the file hasse_diagram.txt");
         return;
     }
 
-    char output[10000] =
-        "---\n"
-        "config:\n"
-        "layout: elk\n"
-        "theme: neo\n"
-        "look: neo\n"
-        "--- \n"
-        "\nflowchart LR \n";
+    fprintf(file, "---\nconfig:\nlayout: elk\ntheme: neo\nlook: neo\n---\n\nflowchart LR \n");
+    t_class_cell* current_cell = partition.head;
 
-    for (int i = 0; i < p_link_array->log_size; i++) {
-        char line[256] = "";
-        t_link current_link = p_link_array->links[i];
+    while (current_cell != NULL) {
+        t_class* cls = current_cell->class;
+        char label[1024] = "";
 
-        sprintf(line, "C%d[%d] --> C%d[%d]\n", current_link.from, current_link.from, current_link.to, current_link.to);
-        strcat(output, line);
+        get_class_label(cls, label);
+        fprintf(file, "%s[\"%s\"]\n", cls->name, label);
+
+        current_cell = current_cell->next;
     }
 
-    fprintf(file, "%s", output);
+    for (int i = 0; i < p_link_array->log_size; i++) {
+        t_link current_link = p_link_array->links[i];
+        fprintf(file, "%s --> %s\n",
+                current_link.from->name,
+                current_link.to->name);
+    }
+
     fclose(file);
-    printf("Hasse diagram generated in hasse_diagram.txt\n");
+    printf("Hasse diagram generated in hasse_diagram.txt (including isolated classes).\n");
 }

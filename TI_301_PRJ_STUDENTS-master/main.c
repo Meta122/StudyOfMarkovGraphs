@@ -15,7 +15,7 @@ int main() {
         display_partition(partition);
         t_link_array * p_link_array = createLinkArray(partition);
         addLinks(p_link_array, graph);
-        create_mermaid_hasse(p_link_array);
+        create_mermaid_hasse(p_link_array, partition);
 
     }
 

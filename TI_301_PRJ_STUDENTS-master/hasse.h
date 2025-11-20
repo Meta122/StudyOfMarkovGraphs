@@ -5,8 +5,8 @@
 #include "string.h"
 
 struct s_link {
-    int from;
-    int to;
+    t_class* from;
+    t_class* to;
 } typedef t_link;
 
 struct s_link_array {
@@ -22,7 +22,7 @@ t_link_array* createLinkArray();
 
 void addLinks(t_link_array* p_link_array, t_adjacency_list graph);
 
-void create_mermaid_hasse(t_link_array* p_link_array);
+void create_mermaid_hasse(t_link_array* p_link_array, t_partition partition);
 
 /**
  * @brief Creates a link array from the given partition and graph.
