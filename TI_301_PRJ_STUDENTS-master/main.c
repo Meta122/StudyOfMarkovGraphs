@@ -1,6 +1,6 @@
 #include "Mermaid Graph/graph.h"
 #include "Mermaid Graph/mermaid.h"
-#include "Tarjan Algorithm/tarjan.h"
+#include "hasse.h"
 #include "Tarjan Algorithm/tarjan_algo.h"
 
 int main() {
@@ -13,6 +13,10 @@ int main() {
         print_adjacency_list(graph);
         partition = tarjan(graph);
         display_partition(partition);
+        t_link_array * p_link_array = createLinkArray(partition);
+        addLinks(p_link_array, graph);
+        create_mermaid_hasse(p_link_array);
+
     }
 
     printf("Exemple 1:\n");
