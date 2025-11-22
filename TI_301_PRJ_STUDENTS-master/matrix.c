@@ -1,6 +1,4 @@
-//
-// Created by overl on 20/11/2025.
-//
+#include "matrix.h"
 
 float * create_matrix_zeros(int n)
 {
@@ -15,11 +13,11 @@ float * create_matrix_zeros(int n)
         lines[i] = column;
     }
     return lines;
-}
+} // Maybe improve with a calloc ?
 
-float * copy_matrix(float * matr)
+float * copy_matrix(float * matr) // To be fixed
 {
-    int lenght=0;
+    int lenght = 0;
     while (matr[lenght])
     {
         lenght++;
@@ -36,15 +34,15 @@ float * copy_matrix(float * matr)
 
 }
 
-float * multiply_matrix(float * matr1, float * matr2)
+float * multiply_matrix(float * matr1, float * matr2) // To be completed
 {
     float * result;
 
 }
 
-float difference_matrix(float * matr1, float * matr2)
+float difference_matrix(float * matr1, float * matr2) // To be fixed
 {
-    float * result;
+    float result;
     int i=0,j=0;
     while (matr1[i])
     {
