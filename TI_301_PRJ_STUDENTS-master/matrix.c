@@ -83,3 +83,81 @@ void display_matrix(float **matrix, int n) { // Made with the help of Gemini to 
         printf("|\n") ;
     }
 }
+
+float ** identity_matrix(int n) {
+    float **matrix = create_matrix_zeros(n) ;
+    for (int i = 0; i < n; i++) {
+        matrix[i][i] = 1 ;
+    }
+    return matrix ;
+}
+
+float ** power_matrix(float ** matrix, int n, int k) {
+    if (k < 0) {
+        printf("Error: k must be positive\n") ;
+        return NULL ;
+    }
+    if (k == 0) {
+        return identity_matrix(n) ;
+    }
+    if (k == 1) {
+        return copy_matrix(matrix, n) ;
+    }
+    float ** result = copy_matrix(matrix, n) ;
+    float ** temp = NULL ;
+    for (int i = 2; i <= k; i++) {
+        temp = multiply_matrix(result, matrix, n) ;
+        free_matrix(result, n) ; // I asked Gemini if there were any problems and it suggested this fix to avoid a memory leak
+        result = temp ;
+    }
+    return result ;
+}
+
+
+/**
+* @brief Extracts a submatrix corresponding to a specific
+component of a graph partition.
+*
+* @param matrix The original adjacency matrix of the graph.
+* @param part The partition of the graph into strongly
+connected components.
+* @param compo_index The index of the component to extract.
+* @return t_matrix The submatrix corresponding to the
+specified component.
+*/
+float ** subMatrix(float ** matrix, t_partition part, int compo_index) { // Made with a bit of help from Gemini to understand what the function is supposed to do
+    t_class_cell * current_class = part.head ;
+    t_class * class = NULL ;
+    int current_index = 0, found = 0 ;
+    while (current_class != NULL && !found) {
+        if (current_index == compo_index) {
+            class = current_class->class ;
+            found = 1 ;
+        } else {
+            current_class = current_class->next ;
+            current_index++ ;
+        }
+    }
+    int n_sub = 0 ;
+    t_tarjan_cell * current_vertex = class->head ;
+    while (current_vertex != NULL) {
+        n_sub++ ;
+        current_vertex = current_vertex->next ;
+    }
+    int * vertices = (int *)malloc(n_sub * sizeof(int)) ;
+    current_vertex = class->head ;
+    for (int i = 0; i < n_sub; i++) {
+        vertices[i] = current_vertex->vertex->identifier ;
+        current_vertex = current_vertex->next ;
+    }
+    float ** sub_matrix = create_matrix_zeros(n_sub);
+    for (int i = 0; i < n_sub; i++) { // Line of the sub-matrix
+        int i_matrix = vertices[i] ; // Line of the original matrix
+        for (int j = 0; j < n_sub; j++) { // Column of the sub-matrix
+            int j_matrix = vertices[j] ; // Column of the original matrix
+            sub_matrix[i][j] = matrix[i_matrix][j_matrix] ;
+        }
+    }
+    free(vertices) ;
+    return sub_matrix ;
+}
