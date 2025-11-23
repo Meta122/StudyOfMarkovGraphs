@@ -2,12 +2,13 @@
 #define MATRIX_H
 #include "list.h"
 
-float * create_matrix_zeros(int n);
-
-float * copy_matrix(float * matr);
-
-float * multiply_matrix(float * matr1, float * matr2);
-
-float difference_matrix(float * matr1, float * matr2);
+float ** create_matrix_zeros(int) ;
+float ** copy_matrix(float **, int) ;
+float ** multiply_matrix(float **, float **, int) ;
+float abs_float(float) ;
+float difference_matrix(float **, float **, int) ;
+void free_matrix(float **, int) ;
+float ** convert_matrix(t_adjacency_list) ;
+void display_matrix(float **, int) ;
 
 #endif //MATRIX_H

@@ -17,7 +17,7 @@ t_list create_empty_list(){
 t_adjacency_list create_empty_adjacency_list(int size){
     t_adjacency_list adjacency_list;
     adjacency_list.size = size;
-    adjacency_list.vertices = (t_list*)malloc(sizeof(t_list*) * size);
+    adjacency_list.vertices = (t_list*)malloc(sizeof(t_list) * size);
     for(int i = 0; i < size; i++){
       adjacency_list.vertices[i] = create_empty_list();
     }
@@ -55,7 +55,7 @@ void display_list (t_list list)
   t_cell* cell = list.head;
   while(cell != NULL)
   {
-    printf("(%d, %f) @-> ", cell->vertex, cell->probability);
+    printf("(%d, %1.2f) @-> ", cell->vertex, cell->probability);
     cell = cell->next;
   }
   printf("NULL\n");

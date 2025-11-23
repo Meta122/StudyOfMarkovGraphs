@@ -1,82 +1,85 @@
 #include "matrix.h"
 
-float * create_matrix_zeros(int n)
-{
-    float * lines[n];
-    for (int i = 0; i < n; i++)
-    {
-        float column[n];
-        for (int j = 0; j < n; j++)
-        {
-            column[j] = 0;
-        }
-        lines[i] = column;
-    }
-    return lines;
-} // Maybe improve with a calloc ?
-
-float * copy_matrix(float * matr) // To be fixed
-{
-    int lenght = 0;
-    while (matr[lenght])
-    {
-        lenght++;
-    }
-    float * mcopy[lenght];
-    for (int i = 0; i < lenght; i++)
-    {
-        for (int j = 0; j < lenght; j++)
-        {
-            mcopy[lenght] = matr[lenght];
-        }
-    }
-    return mcopy;
-
-}
-
-float * multiply_matrix(float * matr1, float * matr2) // To be completed
-{
-    float * result;
-
-}
-
-float difference_matrix(float * matr1, float * matr2) // To be fixed
-{
-    float result;
-    int i=0,j=0;
-    while (matr1[i])
-    {
-        while (matr2[j])
-        {
-            result[i][j]=matr[1]-matr[2];
-            j++;
-        }
-        i++;
-    }
-    return result;
-}
-
-int** matrix_multiply(int n, int** A, int** B) {
-    int** C = (int**)malloc(n * sizeof(int*));
-    if (C == NULL) return NULL;
-
+float ** create_matrix_zeros(int n) {
+    float ** matrix = (float **)malloc(n * sizeof(float *)) ;
     for (int i = 0; i < n; i++) {
-        C[i] = (int*)calloc(n, sizeof(int));
-        if (C[i] == NULL) {
-            for (int k = 0; k < i; k++) free(C[k]);
-            free(C);
-            return NULL;
+        matrix[i] = (float *)calloc(n, sizeof(float)) ;
+    }
+    return matrix;
+}
+
+float ** copy_matrix(float ** matrix, int n) {
+    float ** copy = (float **)malloc(n * sizeof(float *)) ;
+    for (int i = 0; i < n; i++) {
+        copy[i] = (float *)malloc(n * sizeof(float)) ;
+        for (int j = 0; j < n; j++) {
+            copy[i][j] = matrix[i][j] ;
         }
     }
+    return copy ;
+}
 
+float ** multiply_matrix(float ** mat1, float ** mat2, int n) {
+    float ** result = create_matrix_zeros(n) ;
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
+            float sum = 0 ;
             for (int k = 0; k < n; k++) {
-                C[i][j] += A[i][k] * B[k][j];
+                sum += mat1[i][k] * mat2[k][j] ;
             }
+            result[i][j] = sum ;
         }
     }
-
-    return C;
+    return result ;
 }
-//Ai generated, prompt "write a function that multiplies two square matrices in C"
+
+float abs_float(float x) {
+    if (x < 0) {
+        return -x ;
+    }
+    return x ;
+}
+
+float difference_matrix(float ** mat1, float ** mat2, int n) {
+    float result = 0 ;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            float diff = mat1[i][j] - mat2[i][j] ;
+            result += abs_float(diff) ;
+        }
+    }
+    return result ;
+}
+
+void free_matrix(float ** matrix, int n) {
+    for (int i = 0; i < n; i++) {
+        free(matrix[i]) ;
+    }
+    free(matrix) ;
+}
+
+float ** convert_matrix(t_adjacency_list list) {
+    int n = list.size ;
+    float ** matrix = create_matrix_zeros(n) ;
+    for (int i = 0; i < n; i++) {
+        t_list current_list = list.vertices[i] ;
+        t_cell *current_cell = current_list.head ;
+        while (current_cell != NULL) {
+            int j = current_cell->vertex ;
+            float prob = current_cell->probability ;
+            matrix[i][j] = prob ;
+            current_cell = current_cell->next ;
+        }
+    }
+    return matrix ;
+}
+
+void display_matrix(float **matrix, int n) { // Made with the help of Gemini to have a cleaner display
+    for (int i = 0; i < n; i++) {
+        printf("|");
+        for (int j = 0; j < n; j++) {
+            printf(" %1.2f ", matrix[i][j]) ;
+        }
+        printf("|\n") ;
+    }
+}
