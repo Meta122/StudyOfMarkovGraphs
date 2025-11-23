@@ -1,0 +1,82 @@
+#include "matrix.h"
+
+float * create_matrix_zeros(int n)
+{
+    float * lines[n];
+    for (int i = 0; i < n; i++)
+    {
+        float column[n];
+        for (int j = 0; j < n; j++)
+        {
+            column[j] = 0;
+        }
+        lines[i] = column;
+    }
+    return lines;
+} // Maybe improve with a calloc ?
+
+float * copy_matrix(float * matr) // To be fixed
+{
+    int lenght = 0;
+    while (matr[lenght])
+    {
+        lenght++;
+    }
+    float * mcopy[lenght];
+    for (int i = 0; i < lenght; i++)
+    {
+        for (int j = 0; j < lenght; j++)
+        {
+            mcopy[lenght] = matr[lenght];
+        }
+    }
+    return mcopy;
+
+}
+
+float * multiply_matrix(float * matr1, float * matr2) // To be completed
+{
+    float * result;
+
+}
+
+float difference_matrix(float * matr1, float * matr2) // To be fixed
+{
+    float result;
+    int i=0,j=0;
+    while (matr1[i])
+    {
+        while (matr2[j])
+        {
+            result[i][j]=matr[1]-matr[2];
+            j++;
+        }
+        i++;
+    }
+    return result;
+}
+
+int** matrix_multiply(int n, int** A, int** B) {
+    int** C = (int**)malloc(n * sizeof(int*));
+    if (C == NULL) return NULL;
+
+    for (int i = 0; i < n; i++) {
+        C[i] = (int*)calloc(n, sizeof(int));
+        if (C[i] == NULL) {
+            for (int k = 0; k < i; k++) free(C[k]);
+            free(C);
+            return NULL;
+        }
+    }
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            for (int k = 0; k < n; k++) {
+                C[i][j] += A[i][k] * B[k][j];
+            }
+        }
+    }
+
+    return C;
+}
+//Ai generated, prompt "write a function that multiplies two square matrices in C"
