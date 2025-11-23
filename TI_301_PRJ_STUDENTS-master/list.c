@@ -1,5 +1,12 @@
 #include "list.h"
 
+/**
+ * @brief Allocates and initializes a new cell (edge) for the adjacency list.
+ *
+ * @param vertex The destination vertex identifier.
+ * @param probability The probability weight of the edge.
+ * @return t_cell* A pointer to the newly created cell.
+ */
 t_cell* create_cell(int vertex, float probability){
   t_cell* cell = (t_cell*)malloc(sizeof(t_cell));
   cell->vertex = vertex;
@@ -8,12 +15,28 @@ t_cell* create_cell(int vertex, float probability){
   return cell;
 }
 
+/**
+ * @brief Initializes an empty linked list.
+ *
+ * Sets the head pointer to NULL.
+ *
+ * @return t_list An empty list structure.
+ */
 t_list create_empty_list(){
   t_list list;
   list.head = NULL;
   return list;
 }
 
+/**
+ * @brief Creates the main adjacency list structure for the graph.
+ *
+ * Allocates an array of lists corresponding to the number of vertices
+ * [cite_start]and initializes each list to be empty [cite: 627-628].
+ *
+ * @param size The number of vertices in the graph.
+ * @return t_adjacency_list The initialized adjacency list structure.
+ */
 t_adjacency_list create_empty_adjacency_list(int size){
     t_adjacency_list adjacency_list;
     adjacency_list.size = size;
@@ -24,6 +47,13 @@ t_adjacency_list create_empty_adjacency_list(int size){
     return adjacency_list;
 }
 
+/**
+ * @brief Displays the entire adjacency list (the whole graph).
+ *
+ * [cite_start]Iterates through every vertex and prints its associated list of outgoing edges[cite: 629].
+ *
+ * @param adjacency_list The graph data structure to display.
+ */
 void print_adjacency_list(t_adjacency_list adjacency_list){
   for (int i = 0; i < adjacency_list.size; i++){
     printf("List for vertex [%d]: ", i);
@@ -31,6 +61,16 @@ void print_adjacency_list(t_adjacency_list adjacency_list){
   }
 }
 
+/**
+ * @brief Adds a new edge to the end of a specific list.
+ *
+ * This function appends a new cell containing the destination vertex
+ * [cite_start]and probability to the linked list[cite: 625].
+ *
+ * @param list Pointer to the linked list of the source vertex.
+ * @param vertex The destination vertex ID.
+ * @param probability The probability of the transition.
+ */
 void add_cell(t_list *list, int vertex, float probability)
 {
   t_cell *cell = create_cell(vertex, probability);
@@ -49,6 +89,13 @@ void add_cell(t_list *list, int vertex, float probability)
   }
 }
 
+/**
+ * @brief Visualizes the content of a single linked list.
+ *
+ * [cite_start]Prints the vertices and probabilities in the format specified in Part 1 examples [cite: 593-617].
+ *
+ * @param list The list to be displayed.
+ */
 void display_list (t_list list)
 {
   printf("[head @] -> ");
@@ -59,5 +106,4 @@ void display_list (t_list list)
     cell = cell->next;
   }
   printf("NULL\n");
-
 }

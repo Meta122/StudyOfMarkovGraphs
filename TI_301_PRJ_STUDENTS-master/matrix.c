@@ -1,5 +1,11 @@
 #include "matrix.h"
 
+/**
+* @brief Creates an n x n matrix filled with the value 0.
+*
+* @param n The dimension (number of rows and columns) of the matrix.
+* @return float** The n x n matrix initialized with zeros.
+*/
 float ** create_matrix_zeros(int n) {
     float ** matrix = (float **)malloc(n * sizeof(float *)) ;
     for (int i = 0; i < n; i++) {
@@ -8,6 +14,13 @@ float ** create_matrix_zeros(int n) {
     return matrix;
 }
 
+/**
+* @brief Creates a copy of a given matrix of size n.
+*
+* @param matrix The source matrix to be copied.
+* @param n The dimension (number of rows and columns) of the matrix.
+* @return float** A new matrix containing the same values as the source matrix.
+*/
 float ** copy_matrix(float ** matrix, int n) {
     float ** copy = (float **)malloc(n * sizeof(float *)) ;
     for (int i = 0; i < n; i++) {
@@ -19,6 +32,14 @@ float ** copy_matrix(float ** matrix, int n) {
     return copy ;
 }
 
+/**
+ * @brief Multiplies two n x n matrices.
+ *
+ * @param mat1 The first matrix.
+ * @param mat2 The second matrix.
+ * @param n The dimension (number of rows and columns) of the matrices.
+ * @return float** The resulting matrix product.
+ */
 float ** multiply_matrix(float ** mat1, float ** mat2, int n) {
     float ** result = create_matrix_zeros(n) ;
     for (int i = 0; i < n; i++) {
@@ -33,6 +54,13 @@ float ** multiply_matrix(float ** mat1, float ** mat2, int n) {
     return result ;
 }
 
+
+/**
+ * @brief Calculates the absolute value of a floating-point number.
+ *
+ * @param x The input number.
+ * @return float The absolute value of x.
+ */
 float abs_float(float x) {
     if (x < 0) {
         return -x ;
@@ -40,6 +68,17 @@ float abs_float(float x) {
     return x ;
 }
 
+/**
+ * @brief Calculates the total difference between two matrices.
+ *
+ * This function computes the sum of the absolute differences between
+ * corresponding coefficients of the two matrices[cite: 406].
+ *
+ * @param mat1 The first matrix.
+ * @param mat2 The second matrix.
+ * @param n The dimension of the matrices.
+ * @return float The sum of absolute differences.
+ */
 float difference_matrix(float ** mat1, float ** mat2, int n) {
     float result = 0 ;
     for (int i = 0; i < n; i++) {
@@ -51,6 +90,12 @@ float difference_matrix(float ** mat1, float ** mat2, int n) {
     return result ;
 }
 
+/**
+ * @brief Frees the memory allocated for an n x n matrix.
+ *
+ * @param matrix The matrix to free.
+ * @param n The dimension of the matrix.
+ */
 void free_matrix(float ** matrix, int n) {
     for (int i = 0; i < n; i++) {
         free(matrix[i]) ;
@@ -58,6 +103,15 @@ void free_matrix(float ** matrix, int n) {
     free(matrix) ;
 }
 
+/**
+ * @brief Converts an adjacency list (graph) into a transition matrix.
+ *
+ * Each element M[i][j] represents the probability of moving from
+ * vertex i to vertex j[cite: 401].
+ *
+ * @param list The adjacency list representation of the graph.
+ * @return float** The corresponding n x n transition matrix.
+ */
 float ** convert_matrix(t_adjacency_list list) {
     int n = list.size ;
     float ** matrix = create_matrix_zeros(n) ;
@@ -74,6 +128,12 @@ float ** convert_matrix(t_adjacency_list list) {
     return matrix ;
 }
 
+/**
+ * @brief Displays an n x n matrix to the standard output.
+ *
+ * @param matrix The matrix to display.
+ * @param n The dimension of the matrix.
+ */
 void display_matrix(float **matrix, int n) { // Made with the help of Gemini to have a cleaner display
     for (int i = 0; i < n; i++) {
         printf("|");
@@ -84,6 +144,12 @@ void display_matrix(float **matrix, int n) { // Made with the help of Gemini to 
     }
 }
 
+/**
+ * @brief Creates an n x n identity matrix.
+ *
+ * @param n The dimension of the matrix.
+ * @return float** The identity matrix (1s on diagonal, 0s elsewhere).
+ */
 float ** identity_matrix(int n) {
     float **matrix = create_matrix_zeros(n) ;
     for (int i = 0; i < n; i++) {
@@ -92,6 +158,17 @@ float ** identity_matrix(int n) {
     return matrix ;
 }
 
+/**
+ * @brief Calculates the power of a matrix (M^k).
+ *
+ * This function iteratively multiplies the matrix by itself k times
+ * to simulate the evolution of probabilities after k steps[cite: 331].
+ *
+ * @param matrix The base matrix.
+ * @param n The dimension of the matrix.
+ * @param k The exponent (number of steps).
+ * @return float** The resulting matrix raised to the power k.
+ */
 float ** power_matrix(float ** matrix, int n, int k) {
     if (k < 0) {
         printf("Error: k must be positive\n") ;
@@ -162,6 +239,18 @@ float ** subMatrix(float ** matrix, t_partition part, int compo_index, int * n_s
     return sub_matrix ;
 }
 
+
+/**
+ * @brief Tests the convergence of the transition matrix to find a stationary distribution.
+ *
+ * It iteratively computes powers of the matrix (M^n) until the difference between
+ * M^n and M^(n-1) is less than a defined threshold (epsilon = 0.01).
+ * If convergence is reached, it displays the resulting stationary matrix.
+ *
+ * @param M The initial transition matrix.
+ * @param n The dimension (number of rows/columns) of the matrix.
+ * @return int Status code (implicitly 1 if converged, though the return statement is missing in this snippet).
+ */
 int test_convergence(float ** M, int n) {
     float epsilon = 0.01 ;
     float ** Mprev = copy_matrix(M, n) ;

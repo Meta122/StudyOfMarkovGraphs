@@ -1,9 +1,30 @@
 #include "tarjan_algo.h"
 
+/**
+ * @brief Utility function to find the minimum of two integers.
+ *
+ * @param a The first integer.
+ * @param b The second integer.
+ * @return int The smaller value between a and b.
+ */
 int min(int a, int b) {
     return (a < b) ? a : b;
 }
 
+/**
+ * @brief The recursive core of Tarjan's algorithm (Depth First Search).
+ *
+ * This function visits vertices, assigns them a discovery number and a low-link value
+ * (accessible_number), pushes them onto a stack, and identifies the roots of
+ * [cite_start]strongly connected components [cite: 297-299].
+ *
+ * @param G The graph being analyzed.
+ * @param v The current vertex being visited.
+ * @param stack The stack used to track vertices in the current traversal path.
+ * @param num Pointer to the global counter used for numbering vertices.
+ * @param partition The partition structure where identified components (classes) are stored.
+ * @param vertex_list An array of all Tarjan vertices for direct access by index.
+ */
 void strongConnect(t_adjacency_list G, t_tarjan_vertex * v, t_stacklist * stack, int * num, t_partition * partition, t_tarjan_vertex ** vertex_list) {
     v->number = *num ;
     v->accessible_number = v->number;
@@ -49,6 +70,16 @@ void strongConnect(t_adjacency_list G, t_tarjan_vertex * v, t_stacklist * stack,
     }
 }
 
+/**
+ * @brief Main function to execute Tarjan's algorithm on a graph.
+ *
+ * It initializes the necessary data structures (vertex list, stack, partition)
+ * and iterates through all vertices to ensure even disconnected components are processed.
+ * It produces a partition of the graph into Strongly Connected Components (SCCs).
+ *
+ * @param G The adjacency list representation of the graph.
+ * @return t_partition The resulting partition containing the list of SCCs found.
+ */
 t_partition tarjan(t_adjacency_list G) {
     t_partition partition = create_empty_partition() ;
     t_tarjan_vertex ** vertex_list = createVertexList(G) ;

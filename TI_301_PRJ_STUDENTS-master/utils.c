@@ -3,6 +3,17 @@
 #include <string.h>
 #include "utils.h"
 
+
+/**
+ * @brief Generates a string identifier from an integer vertex number.
+ *
+ * Translates a number into an Excel-column style alphabetical ID
+ * (e.g., 1->"A", 2->"B", ..., 26->"Z", 27->"AA").
+ * This is useful for creating readable node labels in visualization tools like Mermaid.
+ *
+ * @param i The vertex number (1-based index).
+ * @return char* A pointer to a static buffer containing the generated string ID.
+ */
 char *getID(int i)
 {
     // translate from 1,2,3, .. ,500+ to A,B,C,..,Z,AA,AB,...

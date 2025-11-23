@@ -2,7 +2,16 @@
 #include "hasse.h"
 #include "Tarjan Algorithm/tarjan_algo.h"
 
-
+/**
+ * We didn't implement it
+ * @brief Removes transitive (redundant) links from the link array.
+ *
+ * This function iterates through the list of links and removes any direct link
+ * A -> C if there exists an intermediate path A -> B -> C. This is essential
+ * for generating a clean Hasse diagram without redundancy.
+ *
+ * @param p_link_array Pointer to the array of links to be processed.
+ */
 void removeTransitiveLinks(t_link_array *p_link_array)
 {
     int i = 0;
@@ -47,7 +56,16 @@ void removeTransitiveLinks(t_link_array *p_link_array)
     }
 }
 
-
+/**
+ * @brief Identifies and adds links between strongly connected components (classes).
+ *
+ * This function maps every vertex of the graph to its corresponding class.
+ * It then iterates through the graph's adjacency list to find edges that connect
+ * two different classes and adds them to the link array if they don't already exist.
+ *
+ * @param p_link_array Pointer to the link array where found links will be stored.
+ * @param graph The original adjacency list of the graph.
+ */
 void addLinks(t_link_array* p_link_array, t_adjacency_list graph) {
     t_partition partition = tarjan(graph);
     int size = graph.size;
@@ -100,6 +118,13 @@ void addLinks(t_link_array* p_link_array, t_adjacency_list graph) {
     free(class_map);
 }
 
+/**
+ * @brief Allocates and initializes a new empty link array.
+ *
+ * It reserves memory for the structure and a fixed capacity (50) of links.
+ *
+ * @return t_link_array* A pointer to the newly created link array structure.
+ */
 t_link_array* createLinkArray(){
   t_link_array* array = (t_link_array*)malloc(sizeof(t_link_array));
     if (array == NULL) return NULL;
@@ -112,6 +137,15 @@ t_link_array* createLinkArray(){
   return array;
 }
 
+/**
+ * @brief Generates a string label containing the vertices of a class.
+ *
+ * Formats the content of a class into a string like "{1,2,3}" to be used
+ * as a label in the visualization.
+ *
+ * @param p_class Pointer to the class structure.
+ * @param buffer Character buffer where the string will be written.
+ */
 void get_class_label(t_class* p_class, char* buffer) {
     strcpy(buffer, "{");
     t_tarjan_cell* curr = p_class->head;
@@ -125,6 +159,16 @@ void get_class_label(t_class* p_class, char* buffer) {
     strcat(buffer, "}");
 }
 
+/**
+ * @brief Generates a Mermaid file representing the Hasse diagram.
+ *
+ * This function creates a "hasse_diagram.txt" file. It first declares all nodes
+ * (classes) with their vertex labels, and then defines the directed links
+ * between them.
+ *
+ * @param p_link_array The array of links between classes.
+ * @param partition The partition containing all the classes (nodes).
+ */
 void create_mermaid_hasse(t_link_array* p_link_array, t_partition partition) {
     FILE *file = fopen("hasse_diagram.txt", "w");
     if (file == NULL) {

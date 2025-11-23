@@ -2,13 +2,22 @@
 #include "stdio.h"
 #include "string.h"
 
+/**
+ * @brief Generates a text file containing the Mermaid code to visualize the graph.
+ *
+ * This function creates a file named "tree.txt" formatted for the Mermaid live editor.
+ * It configures the visualization style (elk layout, neo theme), defines vertices
+ * as circles using letter identifiers[cite: 169, 185], and represents edges with their
+ * associated transition probabilities[cite: 173].
+ *
+ * @param graph The adjacency list representation of the graph to be drawn.
+ */
 void create_mermaid_tree(t_adjacency_list graph){
     FILE *file = fopen("tree.txt", "w"); // read-only, text
     if (file == NULL)
     {
         printf("Error opening the file %s", "tree.txt");
     }
-
     char output[10000] =
         "---\n"
         "config:\n"
@@ -37,8 +46,6 @@ void create_mermaid_tree(t_adjacency_list graph){
             cell = cell->next;
         }
     }
-
     fprintf(file, "%s", output);
     fclose(file);
-
 }

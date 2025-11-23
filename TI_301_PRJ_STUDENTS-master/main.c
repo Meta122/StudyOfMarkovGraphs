@@ -4,12 +4,29 @@
 #include "characteristics.h"
 #include "matrix.h"
 
-
+/**
+ * @brief Clears the standard input buffer (stdin).
+ *
+ * This utility function reads and discards characters from the input stream
+ * until a newline or EOF is reached. It is essential after using scanf()
+ * to prevent leftover characters (like the 'Enter' key) from skipping
+ * subsequent input prompts.
+ * It was made by Gemini to avoid error with unexpected inputs
+ */
 void clear_buffer() {
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
-} // Made by Gemini to avoid error with unexpected inputs
+}
 
+/**
+ * @brief Displays a menu to select a graph data file.
+ *
+ * Presents a numbered list of predefined graph files to the user.
+ * It constructs the full relative path based on the user's choice
+ * and stores it in the provided buffer. It also handles custom filename input.
+ *
+ * @param filepath Buffer where the selected file's full path will be written.
+ */
 void select_file(char* filepath) {
     int choice = 0;
     printf("\n--- SELECT A FILE ---\n");
