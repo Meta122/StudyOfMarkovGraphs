@@ -1,6 +1,7 @@
 #include "Mermaid Graph/graph.h"
 #include "Mermaid Graph/mermaid.h"
 #include "hasse.h"
+#include "characteristics.h"
 #include "Tarjan Algorithm/tarjan_algo.h"
 
 int main() {
@@ -16,7 +17,7 @@ int main() {
         t_link_array * p_link_array = createLinkArray(partition);
         addLinks(p_link_array, graph);
         create_mermaid_hasse(p_link_array, partition);
-
+        print_graph_characteristics(partition, *p_link_array);
     }
 
     printf("Exemple 1:\n");
