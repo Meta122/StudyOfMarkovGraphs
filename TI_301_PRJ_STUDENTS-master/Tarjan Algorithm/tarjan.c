@@ -79,12 +79,10 @@ void display_class(t_class C) {
 void display_partition(t_partition partition) {
     t_class_cell *current_class_cell = partition.head;
     int i = 1;
-    printf("\n|----------------------------------|\n");
     while (current_class_cell != NULL) {
-        printf("     Component %s: ", current_class_cell->class->name);
+        printf("Component %s: ", current_class_cell->class->name);
         display_class(*current_class_cell->class);
         current_class_cell = current_class_cell->next;
         i++;
     }
-    printf("|----------------------------------|\n\n");
 }

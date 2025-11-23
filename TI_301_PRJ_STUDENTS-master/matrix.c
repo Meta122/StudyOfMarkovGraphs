@@ -125,7 +125,7 @@ connected components.
 * @return t_matrix The submatrix corresponding to the
 specified component.
 */
-float ** subMatrix(float ** matrix, t_partition part, int compo_index) { // Made with a bit of help from Gemini to understand what the function is supposed to do
+float ** subMatrix(float ** matrix, t_partition part, int compo_index, int * n_sub) { // Made with a bit of help from Gemini to understand what the function is supposed to do
     t_class_cell * current_class = part.head ;
     t_class * class = NULL ;
     int current_index = 0, found = 0 ;
@@ -138,26 +138,55 @@ float ** subMatrix(float ** matrix, t_partition part, int compo_index) { // Made
             current_index++ ;
         }
     }
-    int n_sub = 0 ;
+    *n_sub = 0 ;
     t_tarjan_cell * current_vertex = class->head ;
     while (current_vertex != NULL) {
-        n_sub++ ;
+        (*n_sub)++ ;
         current_vertex = current_vertex->next ;
     }
-    int * vertices = (int *)malloc(n_sub * sizeof(int)) ;
+    int * vertices = (int *)malloc((*n_sub) * sizeof(int)) ;
     current_vertex = class->head ;
-    for (int i = 0; i < n_sub; i++) {
-        vertices[i] = current_vertex->vertex->identifier ;
+    for (int i = 0; i < *n_sub; i++) {
+        vertices[i] = current_vertex->vertex->identifier-1 ;
         current_vertex = current_vertex->next ;
     }
-    float ** sub_matrix = create_matrix_zeros(n_sub);
-    for (int i = 0; i < n_sub; i++) { // Line of the sub-matrix
+    float ** sub_matrix = create_matrix_zeros(*n_sub);
+    for (int i = 0; i < *n_sub; i++) { // Line of the sub-matrix
         int i_matrix = vertices[i] ; // Line of the original matrix
-        for (int j = 0; j < n_sub; j++) { // Column of the sub-matrix
+        for (int j = 0; j < *n_sub; j++) { // Column of the sub-matrix
             int j_matrix = vertices[j] ; // Column of the original matrix
             sub_matrix[i][j] = matrix[i_matrix][j_matrix] ;
         }
     }
     free(vertices) ;
     return sub_matrix ;
+}
+
+int test_convergence(float ** M, int n) {
+    float epsilon = 0.01 ;
+    float ** Mprev = copy_matrix(M, n) ;
+    float diff = 1.0 ;
+    int cpt = 2 ;
+    const int max_iter = 100 ;
+    printf("\n--- Original transition matrix ---\n") ;
+    display_matrix(Mprev, n) ;
+    while (diff > epsilon && cpt <= max_iter) {
+        float ** M_n = multiply_matrix(Mprev, M, n) ;
+        diff = difference_matrix(M_n, Mprev, n) ;
+        if (diff <= epsilon) {
+            printf("\n--- Convergence Reached ---\n") ;
+            printf("Matrix found between powers n = %d and n = %d.\n", cpt-1, cpt) ;
+            printf("Resulting Matrix :\n", cpt) ;
+            display_matrix(M_n, n);
+        }
+        free_matrix(Mprev, n) ;
+        Mprev = M_n ;
+        cpt++ ;
+    }
+    if (cpt > max_iter && diff > epsilon) {
+        printf("\n--- No convergence found ---\n") ;
+        printf("Convergence was not reached before %d iterations.\n", max_iter) ;
+    }
+    free_matrix(Mprev, n) ;
+    free_matrix(M, n) ;
 }

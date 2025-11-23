@@ -1,6 +1,5 @@
 #include <malloc.h>
 #include "hasse.h"
-
 #include "Tarjan Algorithm/tarjan_algo.h"
 
 
@@ -154,5 +153,5 @@ void create_mermaid_hasse(t_link_array* p_link_array, t_partition partition) {
     }
 
     fclose(file);
-    printf("Hasse diagram created in hasse_diagram.txt\n");
+    printf("Hasse diagram created in hasse_diagram.txt\n\n");
 }

@@ -1,7 +1,3 @@
-//
-// Created by astri on 21/10/2025.
-//
-
 #include "mermaid.h"
 #include "stdio.h"
 #include "string.h"

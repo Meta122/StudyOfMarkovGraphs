@@ -1,7 +1,3 @@
-//
-// Created by rafyv on 21/10/2025.
-//
-
 #include "graph.h"
 
 t_adjacency_list readGraph(const char *filename) {

@@ -12,6 +12,7 @@ float ** convert_matrix(t_adjacency_list) ;
 void display_matrix(float **, int) ;
 float ** identity_matrix(int) ;
 float ** power_matrix(float **, int, int);
-float ** subMatrix(float **, t_partition, int) ;
+float ** subMatrix(float **, t_partition, int, int *) ;
+int test_convergence(float **, int) ;
 
 #endif //MATRIX_H

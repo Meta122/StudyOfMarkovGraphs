@@ -1,7 +1,3 @@
-//
-// Created by astri on 19/11/2025.
-//
-
 #include "characteristics.h"
 
 // It will return 1 meaning it is transitory or 0 meaning it is persistent
@@ -70,5 +66,4 @@ void print_graph_characteristics(t_partition partition, t_link_array links) {
         printf("\n");
         curr = curr->next;
     }
-    printf("-----------------------------\n");
 }

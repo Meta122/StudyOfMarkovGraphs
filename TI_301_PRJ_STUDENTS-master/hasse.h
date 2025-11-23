@@ -1,6 +1,5 @@
 #ifndef __HASSE_H__
 #define __HASSE_H__
-
 #include "Tarjan Algorithm/tarjan.h"
 #include "string.h"
 

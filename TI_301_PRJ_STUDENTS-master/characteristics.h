@@ -1,10 +1,5 @@
-//
-// Created by astri on 19/11/2025.
-//
-
 #ifndef CHARACTERISTICS_H
 #define CHARACTERISTICS_H
-
 #include "Tarjan Algorithm/tarjan.h"
 #include "hasse.h"
 
