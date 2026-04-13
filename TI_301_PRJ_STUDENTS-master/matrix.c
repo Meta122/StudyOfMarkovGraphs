@@ -72,7 +72,7 @@ float abs_float(float x) {
  * @brief Calculates the total difference between two matrices.
  *
  * This function computes the sum of the absolute differences between
- * corresponding coefficients of the two matrices[cite: 406].
+ * corresponding coefficients of the two matrices.
  *
  * @param mat1 The first matrix.
  * @param mat2 The second matrix.
@@ -107,7 +107,7 @@ void free_matrix(float ** matrix, int n) {
  * @brief Converts an adjacency list (graph) into a transition matrix.
  *
  * Each element M[i][j] represents the probability of moving from
- * vertex i to vertex j[cite: 401].
+ * vertex i to vertex j.
  *
  * @param list The adjacency list representation of the graph.
  * @return float** The corresponding n x n transition matrix.
@@ -119,7 +119,7 @@ float ** convert_matrix(t_adjacency_list list) {
         t_list current_list = list.vertices[i] ;
         t_cell *current_cell = current_list.head ;
         while (current_cell != NULL) {
-            int j = current_cell->vertex ;
+            int j = current_cell->vertex-1 ;
             float prob = current_cell->probability ;
             matrix[i][j] = prob ;
             current_cell = current_cell->next ;
@@ -162,7 +162,7 @@ float ** identity_matrix(int n) {
  * @brief Calculates the power of a matrix (M^k).
  *
  * This function iteratively multiplies the matrix by itself k times
- * to simulate the evolution of probabilities after k steps[cite: 331].
+ * to simulate the evolution of probabilities after k steps.
  *
  * @param matrix The base matrix.
  * @param n The dimension of the matrix.
@@ -252,16 +252,18 @@ float ** subMatrix(float ** matrix, t_partition part, int compo_index, int * n_s
  * @return int Status code (implicitly 1 if converged, though the return statement is missing in this snippet).
  */
 int test_convergence(float ** M, int n) {
-    float epsilon = 0.01 ;
+    float epsilon = 0.01 * n * n ;
+    printf("%f", epsilon) ;
     float ** Mprev = copy_matrix(M, n) ;
-    float diff = 1.0 ;
+    float diff = n * n ;
     int cpt = 2 ;
-    const int max_iter = 100 ;
+    const int max_iter = 10000 ;
     printf("\n--- Original transition matrix ---\n") ;
     display_matrix(Mprev, n) ;
     while (diff > epsilon && cpt <= max_iter) {
         float ** M_n = multiply_matrix(Mprev, M, n) ;
         diff = difference_matrix(M_n, Mprev, n) ;
+        printf("%f\n", diff) ;
         if (diff <= epsilon) {
             printf("\n--- Convergence Reached ---\n") ;
             printf("Matrix found between powers n = %d and n = %d.\n", cpt-1, cpt) ;

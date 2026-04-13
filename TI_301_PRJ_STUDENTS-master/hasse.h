@@ -23,12 +23,5 @@ void addLinks(t_link_array* p_link_array, t_adjacency_list graph);
 
 void create_mermaid_hasse(t_link_array* p_link_array, t_partition partition);
 
-/**
- * @brief Creates a link array from the given partition and graph.
- *
- * @param part The partition of the graph.
- * @param graph The adjacency list representation of the graph.
- * @return The created link array.
- */
 
 #endif

@@ -5,7 +5,6 @@
  *
  * According to the definition, a class is 'transitory' if it is possible
  * to 'exit' that class, meaning there is at least one 'outgoing arrow'
- * from this class to another in the Hasse diagram[cite: 483].
  *
  * @param c The class to check.
  * @param links The array of links between classes (Hasse diagram edges).
@@ -24,7 +23,6 @@ int is_transitory(t_class* c, t_link_array links) {
  * @brief Checks if the Markov graph is irreducible.
  *
  * A Markov graph is said to be 'irreducible' if it is composed of only
- * one class (Strongly Connected Component)[cite: 488].
  *
  * @param partition The partition of the graph into classes.
  * @return int 1 if the graph is irreducible, 0 otherwise.
@@ -45,7 +43,7 @@ int is_irreducible(t_partition partition) {
  *
  * A state is 'absorbing' if it meets two conditions:
  * 1. It is in a persistent class (cannot exit the class).
- * 2. It is the only state in that class[cite: 487].
+ * 2. It is the only state in that class.
  *
  * @param c The class to check.
  * @param links The array of links (to check for persistence).
@@ -71,9 +69,9 @@ int is_absorbing(t_class* c, t_link_array links){
  * @brief Displays all the characteristics of the graph.
  *
  * This function prints:
- * - Whether the graph is irreducible or reducible[cite: 499].
- * - For each class: whether it is Transitory or Persistent[cite: 497].
- * - If a class is persistent and single-element, identifies it as Absorbing[cite: 498].
+ * - Whether the graph is irreducible or reducible.
+ * - For each class: whether it is Transitory or Persistent.
+ * - If a class is persistent and single-element, identifies it as Absorbing.
  *
  * @param partition The partition of the graph.
  * @param links The links between the classes of the partition.

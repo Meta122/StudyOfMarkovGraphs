@@ -5,7 +5,6 @@
  *
  * The file format must be:
  * - Line 1: Number of vertices (N).
- * - [cite_start]Subsequent lines: "start_vertex end_vertex probability" [cite: 346-348].
  *
  * @param filename The path to the text file containing the graph data.
  * @return t_adjacency_list The constructed graph structure.
@@ -39,7 +38,6 @@ t_adjacency_list readGraph(const char *filename) {
  *
  * A valid Markov graph requires that the sum of 'outgoing' probabilities
  * for every vertex equals 1. Due to floating-point arithmetic, this function
- * [cite_start]checks if the sum is between 0.99 and 1.01 [cite: 433-434].
  *
  * @param graph The adjacency list of the graph to validate.
  * @return int 1 if the graph is a valid Markov graph, 0 otherwise.

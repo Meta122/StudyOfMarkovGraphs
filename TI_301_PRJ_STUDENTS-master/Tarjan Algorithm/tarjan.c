@@ -50,7 +50,6 @@ t_partition create_empty_partition() {
  * @brief Creates an array of Tarjan vertices from the graph's adjacency list.
  *
  * This function initializes the necessary data structure to track the state
- * [cite_start]of every vertex during the execution of Tarjan's algorithm [cite: 309-310].
  *
  * @param list The adjacency list of the graph.
  * @return t_tarjan_vertex** An array of pointers to initialized Tarjan vertices.

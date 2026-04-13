@@ -32,7 +32,6 @@ t_list create_empty_list(){
  * @brief Creates the main adjacency list structure for the graph.
  *
  * Allocates an array of lists corresponding to the number of vertices
- * [cite_start]and initializes each list to be empty [cite: 627-628].
  *
  * @param size The number of vertices in the graph.
  * @return t_adjacency_list The initialized adjacency list structure.
@@ -50,8 +49,6 @@ t_adjacency_list create_empty_adjacency_list(int size){
 /**
  * @brief Displays the entire adjacency list (the whole graph).
  *
- * [cite_start]Iterates through every vertex and prints its associated list of outgoing edges[cite: 629].
- *
  * @param adjacency_list The graph data structure to display.
  */
 void print_adjacency_list(t_adjacency_list adjacency_list){
@@ -65,7 +62,6 @@ void print_adjacency_list(t_adjacency_list adjacency_list){
  * @brief Adds a new edge to the end of a specific list.
  *
  * This function appends a new cell containing the destination vertex
- * [cite_start]and probability to the linked list[cite: 625].
  *
  * @param list Pointer to the linked list of the source vertex.
  * @param vertex The destination vertex ID.
@@ -91,8 +87,6 @@ void add_cell(t_list *list, int vertex, float probability)
 
 /**
  * @brief Visualizes the content of a single linked list.
- *
- * [cite_start]Prints the vertices and probabilities in the format specified in Part 1 examples [cite: 593-617].
  *
  * @param list The list to be displayed.
  */

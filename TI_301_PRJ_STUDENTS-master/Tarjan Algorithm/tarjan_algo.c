@@ -15,8 +15,7 @@ int min(int a, int b) {
  * @brief The recursive core of Tarjan's algorithm (Depth First Search).
  *
  * This function visits vertices, assigns them a discovery number and a low-link value
- * (accessible_number), pushes them onto a stack, and identifies the roots of
- * [cite_start]strongly connected components [cite: 297-299].
+ * (accessible_number), pushes them onto a stack, and identifies the roots of the classes
  *
  * @param G The graph being analyzed.
  * @param v The current vertex being visited.
@@ -96,7 +95,7 @@ t_partition tarjan(t_adjacency_list G) {
     t_class_cell * current = partition.head;
     int i = 1;
     while (current != NULL) {
-        current->class->name = malloc(16 * sizeof(char)); // Alloue suffisamment d'espace
+        current->class->name = malloc(16 * sizeof(char));
         sprintf(current->class->name, "C%d", i);
         current = current->next;
         i++;
