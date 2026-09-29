@@ -1,14 +1,22 @@
-CMakeLists.txt.user
+# CMake and generated builds
+/build/
+/build-*/
+/cmake-build-*/
+/out/
 CMakeCache.txt
-CMakeFiles
-CMakeScripts
-Testing
+CMakeFiles/
+CMakeScripts/
+Testing/
 Makefile
 cmake_install.cmake
 install_manifest.txt
 compile_commands.json
 CTestTestfile.cmake
-_deps
+_deps/
 CMakeUserPresets.json
+
+# Editors and local output
 .idea/
-cmake-build-debug/
+.vscode/
+*.user
+*.suo

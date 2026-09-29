@@ -1,31 +1,20 @@
-cmake_minimum_required(VERSION 3.30)
+cmake_minimum_required(VERSION 3.20)
 project(StudyOfMarkovGraphs C)
-
 set(CMAKE_C_STANDARD 11)
+set(CMAKE_C_STANDARD_REQUIRED ON)
 
-include_directories(TI_301_PRJ_STUDENTS-master)
-
+set(PROJECT_SOURCE_DIR_ORIGINAL "TI_301_PRJ_STUDENTS-master")
 add_executable(StudyOfMarkovGraphs
-    "TI_301_PRJ_STUDENTS-master/Mermaid Graph/graph.c"
-        "TI_301_PRJ_STUDENTS-master/Mermaid Graph/graph.h"
-        TI_301_PRJ_STUDENTS-master/list.c
-    TI_301_PRJ_STUDENTS-master/list.h
-    TI_301_PRJ_STUDENTS-master/main.c
-    TI_301_PRJ_STUDENTS-master/utils.c
-    TI_301_PRJ_STUDENTS-master/utils.h
-        TI_301_PRJ_STUDENTS-master/hasse.c
-        TI_301_PRJ_STUDENTS-master/hasse.h
-    "TI_301_PRJ_STUDENTS-master/Mermaid Graph/mermaid.c"
-        "TI_301_PRJ_STUDENTS-master/Mermaid Graph/mermaid.h"
-        "TI_301_PRJ_STUDENTS-master/Tarjan Algorithm/tarjan.c"
-        "TI_301_PRJ_STUDENTS-master/Tarjan Algorithm/tarjan.h"
-        "TI_301_PRJ_STUDENTS-master/Tarjan Algorithm/stack.c"
-        "TI_301_PRJ_STUDENTS-master/Tarjan Algorithm/stack.h"
-        "TI_301_PRJ_STUDENTS-master/Tarjan Algorithm/tarjan_algo.c"
-        "TI_301_PRJ_STUDENTS-master/Tarjan Algorithm/tarjan_algo.h"
-        "TI_301_PRJ_STUDENTS-master/characteristics.c"
-        "TI_301_PRJ_STUDENTS-master/characteristics.h"
-        TI_301_PRJ_STUDENTS-master/matrix.c
-        TI_301_PRJ_STUDENTS-master/matrix.h
-
+    "${PROJECT_SOURCE_DIR_ORIGINAL}/Mermaid Graph/graph.c"
+    "${PROJECT_SOURCE_DIR_ORIGINAL}/Mermaid Graph/mermaid.c"
+    "${PROJECT_SOURCE_DIR_ORIGINAL}/Tarjan Algorithm/stack.c"
+    "${PROJECT_SOURCE_DIR_ORIGINAL}/Tarjan Algorithm/tarjan.c"
+    "${PROJECT_SOURCE_DIR_ORIGINAL}/Tarjan Algorithm/tarjan_algo.c"
+    "${PROJECT_SOURCE_DIR_ORIGINAL}/characteristics.c"
+    "${PROJECT_SOURCE_DIR_ORIGINAL}/hasse.c"
+    "${PROJECT_SOURCE_DIR_ORIGINAL}/list.c"
+    "${PROJECT_SOURCE_DIR_ORIGINAL}/main.c"
+    "${PROJECT_SOURCE_DIR_ORIGINAL}/matrix.c"
+    "${PROJECT_SOURCE_DIR_ORIGINAL}/utils.c"
 )
+target_include_directories(StudyOfMarkovGraphs PRIVATE "${PROJECT_SOURCE_DIR_ORIGINAL}")

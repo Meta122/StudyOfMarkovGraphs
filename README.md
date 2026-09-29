@@ -1,35 +1,39 @@
-## Study of Markov Graphs
+# Study of Markov Graphs
 
-This project is written in C language and designed to analyze the structure and behavior of directed graphs.
-It implements classic algorithms like Tarjan's for decomposition into a partition, matrix analysis methods to study convergence,
-and the possibility to create Mermaid graphs for better readability.
+An academic C project for exploring directed graphs and transition matrices. The interactive program loads text examples, displays adjacency structures, finds strongly connected components with Tarjan's algorithm, generates Mermaid diagrams, and studies powers and convergence of matrices.
 
-## Core Features
+## What it covers
 
-The program offers an interactive menu to perform the following tasks:
+- Directed graph loading and adjacency list display
+- Strongly connected components and graph characteristics
+- Mermaid representations of graphs and Hasse diagrams
+- Transition matrices, matrix powers, and numerical convergence experiments
 
-### I. Graph Analysis (Parts 1 & 2)
-* **Graph Loading**: Reads the graph structure from a specific text file.
-* **Adjacency List Display**: Shows the internal representation of the graph.
-* **Mermaid Generation**: Creates a text file in Mermaid format to visualize the graph and its Hasse diagram.
-* **Tarjan's Algorithm**: Determines the partition of the graph into Strongly Connected Components.
-* **Characteristics**: Calculates and displays structural properties (transitory, absorbing, etc.).
+## Build and run
 
-### II. Matrix Analysis (Part 3)
-* **Adjacency Matrix**: Conversion of the graph into a transition matrix.
-* **Matrix Power**: Calculates $M^k$ for a given exponent $k$.
-* **Convergence Study**: Determines if the transition matrix $M$ converges to a limit matrix ($M^\infty$) after a given number of iterations ($M^n \approx M^{n-1}$).
-* **Sub-Matrix Study**: Creates and studies the convergence of a sub-matrix generated from a class of the graph.
+Requires a C11 compiler and CMake 3.20 or newer.
 
-## Compilation and Execution
+```sh
+cmake -S . -B build
+cmake --build build
+cd build
+./StudyOfMarkovGraphs
+```
 
-This project is developed in C and requires a standard C compiler (such as GCC) and a build system (like CMake).
+On Windows, run the executable produced in the selected build configuration. The program expects to be started from the build directory: its bundled sample paths are relative to that directory. In the menu, choose **Load new graph file** first, then an example or a custom path.
 
-## Contributors
+## Repository layout
 
-This project was made by Rafael Véclin, Maël Prouteau and Frédéric Pacreau from group 3 (P2-INT2).
+- `CMakeLists.txt` defines the executable.
+- `TI_301_PRJ_STUDENTS-master/` contains the C source and headers. Its original directory name is retained because the executable currently uses it in relative paths.
+- `TI_301_PRJ_STUDENTS-master/data/` contains sample graphs.
 
-## Tools
+The program is interactive. CI checks that the source builds; it does not claim to test the numerical results or menu behavior.
 
-This project was made using mainly CLion (for C and CMake), GitHub for version control, and Discord for communication between members.
-AI was used to generate specific test-cases, help with documentation, explain some functions and concepts that were hard to understand, and help a bit with debugging.
+## Project context and contributions
+
+Academic group project at Efrei by Rafael Véclin, Maël Prouteau and Frédéric Pacreau (P2-INT2, group 3). The current repository documents collective work; a precise per-person breakdown is not recorded here. CLion, GitHub and Discord supported development. AI assistance was used for selected test cases, documentation, explanations and debugging.
+
+## License
+
+MIT; see [LICENSE](LICENSE).
