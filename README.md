@@ -25,8 +25,8 @@ On Windows, run the executable produced in the selected build configuration. The
 ## Repository layout
 
 - `CMakeLists.txt` defines the executable.
-- `TI_301_PRJ_STUDENTS-master/` contains the C source and headers. Its original directory name is retained because the executable currently uses it in relative paths.
-- `TI_301_PRJ_STUDENTS-master/data/` contains sample graphs.
+- `src/` contains the C source and headers, grouped by graph and Tarjan components.
+- `data/` contains sample graphs.
 
 The program is interactive. CI checks that the source builds; it does not claim to test the numerical results or menu behavior.
 

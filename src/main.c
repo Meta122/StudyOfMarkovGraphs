@@ -38,7 +38,7 @@ void select_file(char* filepath) {
     printf("Choice: ");
     scanf("%d", &choice);
     clear_buffer();
-    const char* base_path = "../TI_301_PRJ_STUDENTS-master/data/";
+    const char* base_path = "../data/";
     switch (choice) {
         case 1:
             sprintf(filepath, "%spart2_graph.txt", base_path);
