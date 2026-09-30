@@ -28,7 +28,7 @@ On Windows, run the executable produced in the selected build configuration. The
 - `src/` contains the C source and headers, grouped by graph and Tarjan components.
 - `data/` contains sample graphs.
 
-The program is interactive. CI checks that the source builds; it does not claim to test the numerical results or menu behavior.
+Run the focused algorithm tests with `ctest --test-dir build --output-on-failure` after building. They check strongly connected components on a graph with two cycles and one isolated vertex, plus known transition-matrix powers. CI runs these tests. The interactive menu and broader numerical behavior still need manual verification.
 
 ## Project context and contributions
 

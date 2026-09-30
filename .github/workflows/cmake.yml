@@ -13,3 +13,5 @@ jobs:
         run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
       - name: Build
         run: cmake --build build --config Release
+      - name: Test algorithms
+        run: ctest --test-dir build --output-on-failure
